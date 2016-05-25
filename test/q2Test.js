@@ -7,12 +7,9 @@ describe('q2', function () {
     });
 
     describe('#foo', function () {
-        it('should', function (done) {
+        it('should get 3', function (done) {
             q2.remoteMathService(function(err, answer) {
-                if (err) {
-                    done("error " + err);
-                    return;
-                }
+                if (err) throw err;
                 if (answer !== 3) {
                     done("Expecting 3, got " + answer);
                     return;
