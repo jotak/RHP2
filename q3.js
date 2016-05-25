@@ -14,11 +14,30 @@ var db = {
 
 // Try to connect, log a successful connection & exit
 // If we fail to connect, log an error and return
-db.connect(function(err) {
-    if (err) {
-        console.error(err);
+function connectionAttempt(attempts) {
+    var isSuccess = db.connect(function(err) {
+        if (err) {
+            console.error(err);
+            return false;
+        }
+
+        console.log('successfully connected!');
+        return true;
+    });
+    if (isSuccess) {
+        // We may want resolve a deferred or something...
         return;
     }
+    if (attempts > 30) {
+        // Arbitrary STOP condition?
+        console.error("Giving up...");
+        return;
+    }
+    var timeToWait = Math.pow(2, attempts) / 10;
+    console.log("Next try in", timeToWait, "seconds");
+    setTimeout(function() {
+        connectionAttempt(attempts+1);
+    }, timeToWait * 1000);
+}
 
-    console.log('successfully connected!');
-});
+connectionAttempt(1);
