@@ -9,8 +9,8 @@ exports.setDoThing = setDoThing;
 
 function foo(callback) {
   doThing(function(err, res) {
-      if (err) callback(err);
-      callback(null, res);
+      if (err) callback(err)
+      else callback(null, res);
   });
 }
 exports.foo = foo;
