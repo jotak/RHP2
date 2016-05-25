@@ -1,5 +1,5 @@
 "use strict";
-var main = require('../main');
+var q1 = require('../q1');
 
 var countError = 0;
 var countSuccess = 0;
@@ -11,7 +11,7 @@ var bar = function(err, res) {
     }
 };
 
-describe('main', function () {
+describe('q1', function () {
 
     beforeEach(function() {
         countError = 0;
@@ -20,11 +20,11 @@ describe('main', function () {
 
     describe('#foo', function () {
         it('should call callback only once on success', function (done) {
-            main.setDoThing(function(callback) {
+            q1.setDoThing(function(callback) {
                 callback(null, "Response for test");
             });
 
-            main.foo(bar);
+            q1.foo(bar);
             if (countError != 0) {
                 done("Expecting countError to be 0, got " + countError);
                 return;
@@ -36,11 +36,11 @@ describe('main', function () {
             done();
         });
         it('should call callback only once on error', function (done) {
-            main.setDoThing(function(callback) {
+            q1.setDoThing(function(callback) {
                 callback("Error for test", null);
             });
 
-            main.foo(bar);
+            q1.foo(bar);
             if (countError != 1) {
                 done("Expecting countError to be 1, got " + countError);
                 return;
