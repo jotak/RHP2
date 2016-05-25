@@ -1,0 +1,16 @@
+{
+  "name": "RHP2",
+  "version": "0.1.0",
+  "author": "Joël Takvorian <joel.takvorian@qaraywa.net> (https://github.com/jotak)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jotak/RHP2"
+  },
+  "main": "main.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "mocha": "^2.5.3"
+  }
+}
