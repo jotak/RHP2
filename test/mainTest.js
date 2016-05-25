@@ -1,19 +1,25 @@
 "use strict";
 var main = require('../main');
 
+var countError = 0;
+var countSuccess = 0;
+var bar = function(err, res) {
+    if (err) {
+        countError++;
+    } else {
+        countSuccess++;
+    }
+};
+
 describe('main', function () {
+
+    beforeEach(function() {
+        countError = 0;
+        countSuccess = 0;
+    });
+
     describe('#foo', function () {
         it('should call callback only once on success', function (done) {
-            var countError = 0;
-            var countSuccess = 0;
-            var bar = function(err, res) {
-                if (err) {
-                    countError++;
-                } else {
-                    countSuccess++;
-                }
-            };
-
             main.setDoThing(function(callback) {
                 callback(null, "Response for test");
             });
@@ -30,16 +36,6 @@ describe('main', function () {
             done();
         });
         it('should call callback only once on error', function (done) {
-            var countError = 0;
-            var countSuccess = 0;
-            var bar = function(err, res) {
-                if (err) {
-                    countError++;
-                } else {
-                    countSuccess++;
-                }
-            };
-
             main.setDoThing(function(callback) {
                 callback("Error for test", null);
             });
